@@ -2,13 +2,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-class UpperClassConverter {
-	public void convertToUpperClass(String mixedCaseLine) {
+class UpperCaseConverter {
+	public void convertToUpperCase(String mixedCaseLine) {
 		System.out.println(mixedCaseLine);
 	}
 }
 
-public class ReadFromFile extends UpperClassConverter {
+public class ReadFromFile extends UpperCaseConverter {
 
 	public static void main(String[] args) {
 
@@ -18,7 +18,7 @@ public class ReadFromFile extends UpperClassConverter {
 
 		try {
 			stringBuilder = new StringBuilder();
-			fileReader = new FileReader("E://User/Study/Java Code/Test.txt");
+			fileReader = new FileReader("PATH TO FILE");
 			BufferedReader buffereddReader = new BufferedReader(fileReader);
 			String line;
 
@@ -28,7 +28,7 @@ public class ReadFromFile extends UpperClassConverter {
 
 			System.out.println("File data : " + stringBuilder.toString() + "\n");
 			String mixedCaseLine = stringBuilder.toString();
-			readFromFile.convertToUpperClass(mixedCaseLine);
+			readFromFile.convertToUpperCase(mixedCaseLine);
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -36,7 +36,7 @@ public class ReadFromFile extends UpperClassConverter {
 	}
 
 	@Override
-	public void convertToUpperClass(String mixedCaseLine) {
+	public void convertToUpperCase(String mixedCaseLine) {
 		String upperCaseLine = "";
 
 		char character;
