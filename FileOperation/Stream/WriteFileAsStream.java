@@ -3,7 +3,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class WriteFileAsString {
+public class WriteFileAsStream {
 	private static void writeUsingOutputStream(String data) {
         OutputStream outputStream = null;
         try {
