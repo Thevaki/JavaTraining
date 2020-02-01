@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://wwww.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="employeeRepository"
+		class="com.thevaki.training.salesmanager.repository.HibernateEmployeeRepositoryImpl" />
+
+	<bean name="employeeService"
+		class="com.thevaki.training.salesmanager.service.EmployeeServiceImpl" autowire="constructor">
+		<!-- <property name="employeeRepository" ref="employeeRepository"></property> -->
+		<!-- <constructo-arg index="0" ref="employeeRepository"></constructo-arg> -->
+	</bean>
+
+</beans>
+
+	
