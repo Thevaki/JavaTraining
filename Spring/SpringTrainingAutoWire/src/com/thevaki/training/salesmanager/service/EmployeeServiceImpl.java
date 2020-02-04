@@ -10,6 +10,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	EmployeeRepository employeeRepository;
 	
+	public EmployeeServiceImpl() {
+		
+	}
+	
 	public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
 		this.employeeRepository = employeeRepository;
 	}

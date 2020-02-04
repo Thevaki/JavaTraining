@@ -12,6 +12,7 @@ import com.thevaki.training.salesmanager.repository.EmployeeRepository;
 @Service("employeeService")
 public class EmployeeServiceImpl implements EmployeeService{
 	
+	//@Autowired 
 	EmployeeRepository employeeRepository;
 	
 	public EmployeeServiceImpl() {
@@ -34,6 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		this.employeeRepository = employeeRepository;
 	}
 	
+	@Override
 	public List<Employee> getAllEmployees(){
 		return employeeRepository.getAllEmployees();
 	}
