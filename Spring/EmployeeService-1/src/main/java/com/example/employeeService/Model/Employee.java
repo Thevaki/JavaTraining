@@ -3,49 +3,42 @@ package com.example.employeeService.Model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Employee {
-	private String name;
-	private int marks;
 
-	public Employee(String name, int marks) {
-		this.name = name;
-		this.marks = marks;
-	}
+    @Id
+    @GeneratedValue
+    public Integer id;
+    private String name;
+    private String city;
 
-	public Employee() {
-	
-	}
 
-	public String getName() {
-		return name;
-	}
+    public String getCity() {
+        return city;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-	public int getMarks() {
-		return marks;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setMarks(int marks) {
-		this.marks = marks;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public static List<Employee> getAllEmployees() {
-		List<Employee> employees = new ArrayList<Employee>();
+    public String getName(){
 
-		Employee employee = new Employee();
-		employee.setName("Thevaki");
-		employee.setMarks(55);
-		employees.add(employee);
-		employee.setName("Claire");
-		employee.setMarks(70);
-		employees.add(employee);
-		employee.setName("David");
-		employee.setMarks(40);
-		employees.add(employee);
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
 
-		return employees;
-	}
 }

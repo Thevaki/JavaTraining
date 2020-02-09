@@ -2,6 +2,9 @@ package com.example.employeeService.controller;
 
 import com.example.employeeService.Model.Employee;
 import com.example.employeeService.Service.EmployeeService;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/Service")
-//@XmlRootElement
+@XmlRootElement
 public class EmployeeController {
 
 	@Autowired
