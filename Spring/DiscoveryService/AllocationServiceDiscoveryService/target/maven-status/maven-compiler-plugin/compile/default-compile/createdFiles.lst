@@ -1,0 +1,6 @@
+com\example\AllocationService\Model\Allocation.class
+com\example\AllocationService\Service\AllocationServiceImpl.class
+com\example\AllocationService\Controller\AllocationController.class
+com\example\AllocationService\Service\AllocationService.class
+com\example\AllocationService\Repository\AllocationRepository.class
+com\example\AllocationService\AllocationServiceApplication.class

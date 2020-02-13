@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/allocationdb?createDatabaseIfNotExist=true
+    username: root
+    password:
+  jpa:
+    hibernate.ddl-auto: create
+    generate-ddl: true
+    show-sql: true
+#  db:
+#    image: mariadb
+#    restart: always
+#    environment:
+#      MYSQL_ROOT_PASSWORD: example
+#
+#    adminer:
+#      image: adminer
+#      restart: always
+#      ports:
+#        - 8080:8080
