@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/employeedb?createDatabaseIfNotExist=true
+    username: root
+    password:
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+#service:
+#  host: http://localhost:8080
+#  allocation: /Allocation/
+#    findAll: fetchAllAllocations
+#    findByEmpId: findAllocationByEmpId
+server:
+  port: 8084
