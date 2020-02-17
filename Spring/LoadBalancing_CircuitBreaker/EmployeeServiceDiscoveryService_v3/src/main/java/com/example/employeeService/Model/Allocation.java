@@ -1,14 +1,15 @@
 package com.example.employeeService.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
 public class Allocation {
-    private int Id;
+    private Integer id;
     private String startDate;
     private String endDate;
     private String projectCode;
 
+    @JsonIgnore
     private Integer empId;
-    private Employee employee;
 }

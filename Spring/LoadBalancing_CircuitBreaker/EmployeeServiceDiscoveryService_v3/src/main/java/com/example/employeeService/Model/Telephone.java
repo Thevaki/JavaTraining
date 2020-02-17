@@ -17,6 +17,6 @@ public class Telephone {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn
 	@JsonIgnore
-	Employee employee;
+	private Employee employee;
 
 }

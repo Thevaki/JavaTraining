@@ -2,6 +2,7 @@ package com.example.employeeService.Model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -11,25 +12,24 @@ import javax.persistence.*;
 public class Employee {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+	private String city;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	Address Address;
+	private Address Address;
 	
 	@OneToMany(mappedBy="employee",cascade = CascadeType.ALL)
-	List<Telephone>telephones;
-	
-	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Telephone> telephones;
+
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name="project_employee",
 			   joinColumns= @JoinColumn (name="eid", referencedColumnName="id"),
 			   inverseJoinColumns=@JoinColumn(name="pid",referencedColumnName="id"))
-	List<Project>projects;
+	private List<Project>projects;
 
 	@Transient
-	private List<Allocation> allocations;
+	private List<Allocation> allocations = new ArrayList<>();
 
-	public void setAllocations(List<Allocation> asList) {
-	}
 }

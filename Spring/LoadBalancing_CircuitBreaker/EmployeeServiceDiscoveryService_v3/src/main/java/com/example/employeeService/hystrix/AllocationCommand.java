@@ -4,7 +4,10 @@ import com.example.employeeService.Model.Allocation;
 import com.example.employeeService.Model.Employee;
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 public class AllocationCommand extends HystrixCommand<Allocation[]> {
@@ -13,9 +16,10 @@ public class AllocationCommand extends HystrixCommand<Allocation[]> {
     private HttpHeaders httpHeaders;
     private RestTemplate restTemplate;
 
-    @Override
-    protected Allocation[] run() throws Exception {
-        return new Allocation[0];
+    protected Allocation[] run(){
+        HttpEntity<String> httpEntity = new HttpEntity<>("", httpHeaders);
+        ResponseEntity<Allocation[]> result = restTemplate.exchange("http://allocation/Allocation/findAllocationByEmpId/" + employee.getId(), HttpMethod.GET, httpEntity, Allocation[].class);
+        return result.getBody();
     }
 
     public  AllocationCommand(Employee employee, HttpHeaders httpHeaders, RestTemplate restTemplate){
@@ -25,7 +29,8 @@ public class AllocationCommand extends HystrixCommand<Allocation[]> {
         this.restTemplate=restTemplate;
     }
 
-    protected Allocation[] getFallBack(){
-        return new Allocation[1];
+    @Override
+    protected Allocation[] getFallback() {
+        return new Allocation[0];
     }
 }

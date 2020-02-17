@@ -16,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/Employee")
-@XmlRootElement
 public class EmployeeController {
 
 	@Autowired
@@ -29,19 +28,13 @@ public class EmployeeController {
 
 	@RequestMapping(value="/findEmployeeById/{id}",method = RequestMethod.POST)
 	public Employee findEmployee(@PathVariable("id") Integer id){
-		return employeeService.findEmployeeById(id);
+		return employeeService.findById(id);
 	}
 
 	@RequestMapping(value="/fetchAllEmployees",method = RequestMethod.GET)
 	public List<Employee> fetchAllEmployees(){
 		return employeeService.fetchAllEmployee();
 	}
-
-	/*@RequestMapping(value="/fetchAllAllocationsEmployee",method = RequestMethod.GET)
-	public List<Allocation> getAllAllocations()
-	{
-		return employeeService.fetchAllAllocations();
-	}*/
 
 	@RequestMapping("/fetchAllocation/{id}")
 	public Employee fetchAllocation(@PathVariable Integer id) {

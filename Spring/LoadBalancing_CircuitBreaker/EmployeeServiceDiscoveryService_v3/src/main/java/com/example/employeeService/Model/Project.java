@@ -1,14 +1,11 @@
 package com.example.employeeService.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -19,7 +16,8 @@ public class Project {
 	private Integer id;
     private String projectName;
     
-    @ManyToMany(mappedBy = "projects")
-    List<Employee> employees;
+    @ManyToMany(mappedBy = "projects",cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Employee> employees;
     
 }

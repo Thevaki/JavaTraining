@@ -25,54 +25,34 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    //@Autowired
+    @Autowired
     HttpHeaders httpHeaders;
 
-    //@Autowired
+    @Autowired
     RestTemplate restTemplate;
-
-    /*@Bean
-    @LoadBalanced
-    RestTemplate getRestTemplate() {
-        return new RestTemplate();
-    }*/
 
     @Override
     public Employee save(Employee employee){
+        for (Telephone telephone : employee.getTelephones()) {
+            telephone.setEmployee(employee);
+        }
         return employeeRepository.save(employee);
     }
 
-    public Employee findEmployeeById(Integer id){
-        Optional<Employee> employee = employeeRepository.findById(id);
-
-        if(employee.isPresent()) {
-            return employee.get();
+    public Employee findById(Integer empId){
+        Optional<Employee> employees = employeeRepository.findById(empId);
+        if(employees.isPresent()) {
+            return employees.get();
         }
-        return null;
+        return new Employee();
     }
 
     public List<Employee> fetchAllEmployee(){
         return  employeeRepository.findAll();
     }
 
-   /* public List<Allocation> fetchAllAllocations(){
-
-        final String uri = "http://localhost:8080/Allocation/fetchAllAllocations";
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Allocation[]> result = restTemplate.getForEntity(uri, Allocation[].class);
-
-        Allocation[] resultBody = result.getBody();
-        List<Allocation> allocations = new ArrayList<>();
-
-        for (Allocation allocation : resultBody) {
-            allocation.setEmployee(this.findEmployeeById(allocation.getEmpId()));
-            allocations.add(allocation);
-        }
-        return allocations;
-    }*/
-
     public Employee fetchAllocation(Integer id){
-        Employee employee = this.findEmployeeById(id);
+        Employee employee = this.findById(id);
         AllocationCommand allocationCommand = new AllocationCommand(employee,httpHeaders,restTemplate);
         employee.setAllocations(Arrays.asList(allocationCommand.execute()));
         return employee;

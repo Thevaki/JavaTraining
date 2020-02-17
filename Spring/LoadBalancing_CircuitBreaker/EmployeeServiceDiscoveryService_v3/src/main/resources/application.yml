@@ -5,13 +5,14 @@ spring:
     username: root
     password:
   jpa:
-    hibernate.ddl-auto: update
-    generate-ddl: true
-    show-sql: true
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+server:
+  port: 8084
 #service:
 #  host: http://localhost:8080
 #  allocation: /Allocation/
 #    findAll: fetchAllAllocations
 #    findByEmpId: findAllocationByEmpId
-server:
-  port: 8084

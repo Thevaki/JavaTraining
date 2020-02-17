@@ -7,7 +7,7 @@ import com.example.employeeService.Model.*;
 public interface EmployeeService  {
     Employee save(Employee employee);
 
-    Employee findEmployeeById(Integer id);
+    Employee findById(Integer id);
 
     List<Employee> fetchAllEmployee();
 
