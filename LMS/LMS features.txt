@@ -1,0 +1,16 @@
+Library Management System
+
+Book Service
+User Service
+Registered user Service
+Staff service
+Recommendations Service
+Admin Service
+
+Features
+---------------------------
+View Books by categories, book name, author
+add, edit & delete book
+
+
+
