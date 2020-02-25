@@ -4,6 +4,9 @@ import java.net.*;
 import java.io.*;
 
 public class Client {
+    private static final String TRUSTSTORE_LOCATION = "E://VTraining/ChatApplication_V2/Keys/ServerKeyStore.jks";
+    private static final String TRUSTSTORE_PASSWORD = "1234567";
+
     private String hostname;
     private int port;
     private String userName;
@@ -15,6 +18,9 @@ public class Client {
     }
 
     public static void main(String[] args) {
+        System.setProperty("javax.net.ssl.trustStore", TRUSTSTORE_LOCATION);
+        System.setProperty("javax.net.ssl.trustStorePassword", TRUSTSTORE_PASSWORD);
+
         if (args.length < 3)
             return;
 

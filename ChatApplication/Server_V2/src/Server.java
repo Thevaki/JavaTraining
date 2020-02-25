@@ -1,9 +1,16 @@
+import javax.net.ServerSocketFactory;
+import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 import java.io.*;
 import java.net.*;
 import java.util.*;
 
 public class Server {
+
+    private static final int HTTPS_PORT = 8282;
+    private static final String KEYSTORE_LOCATION = "E://VTraining/ChatApplication_V2/Keys/ServerKeyStore.jks";
+    private static final String KEYSTORE_PASSWORD = "1234567";
+
     private int port;
     private Set<String> userNames = new HashSet<>();
     private Set<UserThread> userThreads = new HashSet<>();
@@ -12,7 +19,15 @@ public class Server {
         this.port = port;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        System.setProperty("javax.net.ssl.keyStore", KEYSTORE_LOCATION);
+        System.setProperty("javax.net.ssl.keyStorePassword", KEYSTORE_PASSWORD);
+
+        /*ServerSocketFactory ssf = SSLServerSocketFactory.getDefault();
+        SSLServerSocket serverSocket = (SSLServerSocket) ssf.createServerSocket(HTTPS_PORT);
+        System.out.println("Chat Server Started on socket:127.0.0.1:" + HTTPS_PORT );*/
+
+
         if (args.length < 1) {
             System.out.println("Syntax: java ChatServer <port-number>");
             System.exit(0);
