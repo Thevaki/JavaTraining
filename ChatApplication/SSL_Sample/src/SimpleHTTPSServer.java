@@ -24,39 +24,33 @@ import com.sun.net.httpserver.HttpsExchange;
 public class SimpleHTTPSServer {
     private static HashMap<String, ArrayList> userList = new HashMap<>();
 
-    //Test class
     public static class MyHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
             String response = "Welcome to the chat group server !";
-            HttpsExchange httpsExchange = (HttpsExchange) t;
+            //HttpsExchange httpsExchange = (HttpsExchange) t;
             t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
             t.sendResponseHeaders(200, response.getBytes().length);
             OutputStream os = t.getResponseBody();
 
-
-            //write response
             os.write(response.getBytes());
             os.close();
         }
     }
 
-
     public static class registerUser implements HttpHandler {
         @Override
         public void handle(HttpExchange he) throws IOException {
-            // parse request
-            Map<String, Object> parameters = new HashMap<String, Object>();
+
+            //Map<String, Object> parameters = new HashMap<String, Object>();
             URI requestedUri = he.getRequestURI();
             String query = requestedUri.getRawQuery();
-
 
             String clientName = query.substring(query.indexOf("=") + 1, query.length());
             System.out.println(clientName);
 
             String response = "okk you are registered !";
 
-            //Check User is in if not add
             if (userList.keySet().stream().anyMatch(clientName::equals)) {
                 System.out.println("user Already Present !");
                 response = "user Already Present !";
@@ -65,7 +59,6 @@ public class SimpleHTTPSServer {
             }
 
             System.out.println(userList);
-            // send response
             he.sendResponseHeaders(200, response.length());
             OutputStream os = he.getResponseBody();
             os.write(response.toString().getBytes());
@@ -78,7 +71,7 @@ public class SimpleHTTPSServer {
     public static class listUsers implements HttpHandler {
         @Override
         public void handle(HttpExchange he) throws IOException {
-            // parse request
+
             Map<String, Object> parameters = new HashMap<String, Object>();
             URI requestedUri = he.getRequestURI();
             String query = requestedUri.getRawQuery();
@@ -86,7 +79,6 @@ public class SimpleHTTPSServer {
             String clientName = query.substring(query.indexOf("=") + 1, query.length());
             System.out.println(clientName);
 
-            // userList.keySet().toString().replaceAll(clientName, clientName + "(You)")
             String response = "";
 
             for (String name : userList.keySet()) {
@@ -98,7 +90,7 @@ public class SimpleHTTPSServer {
             }
 
             System.out.println(userList + "Sended");
-            // send response
+
             he.sendResponseHeaders(200, response.length());
             OutputStream os = he.getResponseBody();
             os.write(response.toString().getBytes());
@@ -111,7 +103,7 @@ public class SimpleHTTPSServer {
         @Override
         public void handle(HttpExchange he) throws IOException {
             try {
-                // parse request
+
                 Map<String, Object> parameters = new HashMap<String, Object>();
                 URI requestedUri = he.getRequestURI();
                 String query = requestedUri.getRawQuery();
@@ -119,7 +111,6 @@ public class SimpleHTTPSServer {
                 String clientName = query.substring(query.indexOf("=") + 1, query.length());
                 System.out.println(clientName);
 
-                // userList.keySet().toString().replaceAll(clientName, clientName + "(You)")
                 String response = "no";
                 if ( userList.get(clientName).size() >1) {
                     for (String name : userList.keySet()) {
@@ -131,7 +122,7 @@ public class SimpleHTTPSServer {
                 }
 
                 System.out.println(userList + "Sended");
-                // send response
+
                 he.sendResponseHeaders(200, response.length());
                 OutputStream os = he.getResponseBody();
                 os.write(response.toString().getBytes());
@@ -146,7 +137,7 @@ public class SimpleHTTPSServer {
     public static class sendMessages implements HttpHandler {
         @Override
         public void handle(HttpExchange he) throws IOException {
-            // parse request
+
             Map<String, Object> parameters = new HashMap<String, Object>();
             URI requestedUri = he.getRequestURI();
             String query = requestedUri.getRawQuery();
@@ -163,7 +154,6 @@ public class SimpleHTTPSServer {
                     String receiver = matcher2.group("rec");
                     String sender = matcher2.group("sen");
 
-
                     userList.keySet().forEach(name -> {
                         if (receiver.equals(name)) {
                             userList.get(name).add(0, new ArrayList<String>());
@@ -175,8 +165,6 @@ public class SimpleHTTPSServer {
 
                     String response = "messeges sended to " + receiver;
 
-
-                    // send response
                     he.sendResponseHeaders(200, response.length());
                     OutputStream os = he.getResponseBody();
                     os.write(response.toString().getBytes());
@@ -194,45 +182,35 @@ public class SimpleHTTPSServer {
     public static void main(String[] args) throws Exception {
 
         try {
-            // setup the socket address
+
             InetSocketAddress address = new InetSocketAddress(8000);
 
-            // initialise the HTTPS server
             HttpsServer httpsServer = HttpsServer.create(address, 0);
             SSLContext sslContext = SSLContext.getInstance("TLS");
 
-            // initialise the keystore
             char[] password = "123456".toCharArray();
             KeyStore ks = KeyStore.getInstance("JKS");
             FileInputStream fis = new FileInputStream("src/myKeyStore.jks");
             ks.load(fis, password);
 
-            // setup the key manager factory
             KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
             kmf.init(ks, password);
 
-            // setup the trust manager factory
             TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
             tmf.init(ks);
 
-            // setup the HTTPS context and parameters
             sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 
-
-//            System.setProperty("javax.net.ssl.trustStore", "src/myKeyStore.jks");
-//            System.setProperty("javax.net.ssl.trustStorePassword", "123456");
-//            System.setProperty("javax.net.debug", "ssl:record");
             httpsServer.setHttpsConfigurator(new HttpsConfigurator(sslContext) {
                 public void configure(HttpsParameters params) {
                     try {
-                        // initialise the SSL context
+
                         SSLContext context = getSSLContext();
                         SSLEngine engine = context.createSSLEngine();
                         params.setNeedClientAuth(false);
                         params.setCipherSuites(engine.getEnabledCipherSuites());
                         params.setProtocols(engine.getEnabledProtocols());
 
-                        // Set the SSL parameters
                         SSLParameters sslParameters = context.getSupportedSSLParameters();
                         params.setSSLParameters(sslParameters);
 
@@ -241,7 +219,7 @@ public class SimpleHTTPSServer {
                     }
                 }
             });
-            //Map th httphandlers to url
+
             httpsServer.createContext("/inbox", new getMyMessage());
             httpsServer.createContext("/list", new listUsers());
             httpsServer.createContext("/register", new registerUser());

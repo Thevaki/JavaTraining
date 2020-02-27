@@ -149,7 +149,6 @@ public class SClient {
             URL myUrl1 = new URL(httpsURL1);
             HttpsURLConnection conn1 = (HttpsURLConnection) myUrl1.openConnection();
 
-            //get response sout
             InputStream is1 = conn1.getInputStream();
             InputStreamReader isr1 = new InputStreamReader(is1);
             BufferedReader br1 = new BufferedReader(isr1);
@@ -165,12 +164,10 @@ public class SClient {
 
     private static void checkInbox() {
         try {
-            // System.out.println("inbox________________");
             String httpsURL1 = "https://127.0.0.1:8000/inbox?name=" + name;
             URL myUrl1 = new URL(httpsURL1);
             HttpsURLConnection conn1 = (HttpsURLConnection) myUrl1.openConnection();
 
-            //get response sout
             InputStream is1 = conn1.getInputStream();
             InputStreamReader isr1 = new InputStreamReader(is1);
             BufferedReader br1 = new BufferedReader(isr1);
