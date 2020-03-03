@@ -5,9 +5,13 @@ import com.libraryManagementSystem.Book.Model.Book;
 import java.util.List;
 
 public interface BookService {
-    Book save(Book book);
+    Book createBook(Book book);
 
-    Book findBook(int id);
+    Book editBook(Book book);
+
+    Book deleteBook(Integer id);
+
+    Book findBook(Integer id);
 
     List<Book> fetchAllBooks();
 }

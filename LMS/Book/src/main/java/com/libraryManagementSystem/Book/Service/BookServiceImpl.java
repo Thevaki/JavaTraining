@@ -15,11 +15,24 @@ public class BookServiceImpl implements BookService {
     BookRepository bookRepository;
 
     @Override
-    public Book save(Book book){
+    public Book createBook(Book book){
         return bookRepository.save(book);
     }
 
-    public Book findBook(int id){
+    public Book editBook(Book book){return bookRepository.save(book);}
+
+    public Book deleteBook(Integer id){
+        Optional<Book> book = bookRepository.findById(id);
+
+        if(book.isPresent()) {
+            bookRepository.deleteById(id);
+            return book.get();
+        }
+        return null;
+
+    }
+
+    public Book findBook(Integer id){
         Optional<Book> book = bookRepository.findById(id);
 
         if(book.isPresent()) {

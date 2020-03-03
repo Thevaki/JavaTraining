@@ -18,8 +18,14 @@ public class BookController {
 
     @RequestMapping(value = "/createBook" , method = RequestMethod.POST)
     public Book createBook(@RequestBody Book book){
-        return bookService.save(book);
+        return bookService.createBook(book);
     }
+
+    @RequestMapping(value = "/editBook",method = RequestMethod.PUT)
+    public Book editBook(@RequestBody Book book){return bookService.editBook(book);}
+
+    @RequestMapping(value = "/deleteBook/{id}",method = RequestMethod.DELETE)
+    public Book deleteBook(@PathVariable("id") Integer id){return bookService.deleteBook(id);}
 
     @RequestMapping(value="/findBook/{id}",method = RequestMethod.GET)
     public Book findEmployee(@PathVariable("id") Integer id){
