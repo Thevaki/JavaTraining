@@ -1,4 +1,4 @@
-package com.libraryManagementSystem.Book.Model;
+package com.libraryManagementSystem.Staff.Model;
 
 import lombok.Data;
 
@@ -9,10 +9,10 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Book {
+public class Staff {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer bookId;
-    private String bookName;
-    private String author;
+    private Integer staffId;
+    private String staffName;
+    private String staffNicNo;
 }

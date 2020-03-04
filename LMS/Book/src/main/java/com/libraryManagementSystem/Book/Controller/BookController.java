@@ -28,12 +28,12 @@ public class BookController {
     public Book deleteBook(@PathVariable("id") Integer id){return bookService.deleteBook(id);}
 
     @RequestMapping(value="/findBook/{id}",method = RequestMethod.GET)
-    public Book findEmployee(@PathVariable("id") Integer id){
+    public Book findBook(@PathVariable("id") Integer id){
         return bookService.findBook(id);
     }
 
     @RequestMapping(value="/fetchAllBooks",method = RequestMethod.GET)
-    public List<Book> fetchAllEmployees(){
+    public List<Book> fetchAllBooks(){
         return bookService.fetchAllBooks();
     }
 
