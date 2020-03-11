@@ -3,9 +3,9 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/userdb?createDatabaseIfNotExist=true
     username: root
-    password:
+    password: virtusa@1234
   jpa:
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: create
     generate-ddl: true
     show-sql: true
 server:
