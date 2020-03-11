@@ -3,7 +3,7 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/userdb?createDatabaseIfNotExist=true
     username: root
-    password: virtusa@1234
+    password:
   jpa:
     hibernate.ddl-auto: create
     generate-ddl: true
