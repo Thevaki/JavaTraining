@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-books',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BooksComponent implements OnInit {
 
-  constructor() { }
+   books = [];
 
-  ngOnInit() {
+   constructor(private dataService: DataService) { }
+
+   ngOnInit() {
+
+    this.dataService.sendGetRequest().subscribe((data: any[])=>{
+      console.log(data);
+      this.books = data;
+    })  
   }
+
 
 }
