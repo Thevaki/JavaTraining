@@ -1,20 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BooksComponent } from './books/books.component';
-//import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-
-
-// const routes: Routes = [
-//   {
-//     path: '',    
-//     component: AppComponent,
-//     children: [
-//       { path: 'books', loadChildren: './books/books.component' }
-//       //{ path: 'drivers', loadChildren: './drivers/drivers.module#DriversModule' },
-// //  },
-//     ]}
-// ];
+import { BookDetailComponent } from './book-detail/book-detail.component';
 
 const routes: Routes = [
   {
@@ -24,6 +12,10 @@ const routes: Routes = [
   {
     path:'login',
     component:LoginComponent
+  },
+  {
+    path: 'book-detail',    
+    component: BookDetailComponent
   }
 ];
 

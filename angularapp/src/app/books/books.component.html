@@ -1,36 +1,21 @@
-
-<!-- <h1>Hi</h1><p>books works!</p> -->
-
-<!-- <div>
-  <ul>
-   <li *ngFor="let book of books">
-     {{ book.bookId}}
-     {{ book.bookName}}
-     {{ book.author}}
-    </li>
-    <img  class="images" src="./assets/BookImages/1.jpg"/>
-  </ul>
-</div> -->
-
- <div class="container"><br/>
-            <div class="row">	
-                <div *ngFor="let book of books">			
-                        <div class="col-md-8">
-                            <div class="thumbnail">
-                                <img width="200" height="250" src="./assets/BookImages/{{book.imageUrl}}">
-                                <div class ="caption">
-                                    <h6>{{ book.bookName}}</h6>
-									
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <h6> {{ book.author}}</h6>
-                                        </div>
-                                    </div>
-                                    <button class="add_cart btn btn-info btn-block">View Book</button>
-								<p><p>
-								</div>
+<div class="container"><br/>
+    <div class="row">	
+        <div *ngFor="let book of books">			
+            <div class="col-md-8">
+                <div class="thumbnail">
+                    <img width="200" height="250" src="./assets/BookImages/{{book.imageUrl}}">
+                    <div class ="caption">
+                        <h6>{{ book.bookName}}</h6>
+						<div class="row">
+                            <div class="col-md-7">
+                            	<h6> {{ book.author}}</h6>
                             </div>
                         </div>
-			</div>
+                        <button class="add_cart btn btn-info btn-block" a routerLink="/book-detail">View Book</button>
+						<p><p>
+					</div>
+                </div>
+            </div>
 		</div>
+	</div>
 </div>

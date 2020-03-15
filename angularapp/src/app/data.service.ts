@@ -6,11 +6,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DataService {
 
-  private REST_API_SERVER = "http://localhost:8080/Book/fetchAllBooks";
+  private FETCH_ALL_BOOKS = "http://localhost:8080/Book/fetchAllBooks";
 
   constructor(private httpClient: HttpClient) { }
 
-   public sendGetRequest(){
-    return this.httpClient.get(this.REST_API_SERVER);
+   public fetchAllBooks(){
+    return this.httpClient.get(this.FETCH_ALL_BOOKS);
+  }
+
+  private FIND_BOOK = "http://localhost:8080/Book/findBook/1";
+
+   public findBook(){
+    return this.httpClient.get(this.FIND_BOOK);
   }
 }
