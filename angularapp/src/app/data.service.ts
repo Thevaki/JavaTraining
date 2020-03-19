@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from './user';
+//import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,9 +21,9 @@ export class DataService {
     return this.httpClient.get(this.FIND_BOOK);
   }
 
-  private CREATE_USER = "http://localhost:8080/User/createUser";
+  private CREATE_USER = "http://localhost:8081/User/createUser";
 
-  public createUser(user: User){
+  createUser(user){
     return this.httpClient.post(this.CREATE_USER,user);
   }
 
