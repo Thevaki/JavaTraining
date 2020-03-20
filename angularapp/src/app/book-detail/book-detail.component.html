@@ -1,25 +1,27 @@
 <div class="container"><br/>
 			<div class="row">
+				<label>{{ title}} </label><p>
 				<div class = "col-md-12">  
-					
 					<div class="row">			
-						<div *ngFor="let bookDetails of bookDetail">
+						 <!-- <div *ngFor="let book of data"> -->
 							<div class="col-md-4">
 								<div class="thumbnail">
-									<img width="300" height="375" src="./assets/BookImages/{{bookDetails.imageUrl}}">
+									<img width="300" height="375" src="./assets/BookImages/{{imageUrl}}">
 								</div>
 							</div>
+
+							<p>
 
 							<div class="col-md-8">
 								<h4>
 								<div>
 									<label><b>  Title     :    </b></label>
-									<label>{{ bookDetails.bookName}} </label><p>
-									</div>
-									<div>
-										<label><b> 	Author  :	</b> </label> 
-										<label> {{ bookDetails.author}} </label><p> 
-									</div>
+									<label>{{ bookName}} </label><p>
+								</div>
+								<div>
+									<label><b> 	Author  :	</b> </label> 
+									<label> {{ author}} </label><p> 
+								</div>
 									<!-- <div>
 										<label><b> Category   :	 </b></label> 
 										<label>{{ bookDetail.category}}</label><p>
@@ -29,9 +31,9 @@
 										<label>{{ bookDetail.price}} </label><p>
 									</div> -->
 								</h4>
-							    </div>
-						</div>
+							</div>
+					
 					</div>
 				</div>
 			</div>
-		<div>
+<div>
