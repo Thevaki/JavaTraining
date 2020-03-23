@@ -15,4 +15,5 @@ public class Book {
     private Integer bookId;
     private String bookName;
     private String author;
+    private String imageUrl;
 }

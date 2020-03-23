@@ -1,6 +1,9 @@
-package com.libraryManagementSystem.User.SecurityConfig;
+package com.libraryManagementSystem.User.Model;
 
-public class AuthenticationResponse {
+import java.io.Serializable;
+
+public class AuthenticationResponse implements Serializable {
+
     private final String jwt;
 
     public AuthenticationResponse(String jwt) {

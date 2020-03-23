@@ -27,11 +27,13 @@ public class BookController {
     @RequestMapping(value = "/deleteBook/{id}",method = RequestMethod.DELETE)
     public Book deleteBook(@PathVariable("id") Integer id){return bookService.deleteBook(id);}
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value="/findBook/{id}",method = RequestMethod.GET)
     public Book findBook(@PathVariable("id") Integer id){
         return bookService.findBook(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping(value="/fetchAllBooks",method = RequestMethod.GET)
     public List<Book> fetchAllBooks(){
         return bookService.fetchAllBooks();

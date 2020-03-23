@@ -1,19 +1,20 @@
-package com.libraryManagementSystem.User.SecurityConfig;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
+package com.libraryManagementSystem.User.util;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+
 @Service
 public class JwtUtil {
-    private String SECRET_KEY = "secret";
+	private String SECRET_KEY = "secret";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
