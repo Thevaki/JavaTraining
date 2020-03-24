@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 //import { User } from './user';
 
 @Injectable({
@@ -24,10 +25,27 @@ export class DataService {
   private CREATE_USER = "http://localhost:8081/User/createUser";
 
   createUser(user){
-    return this.httpClient.post(this.CREATE_USER,user);
+      const idToken = localStorage.getItem("id_token");
+      console.log("Token "+idToken);
+
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer "+idToken });
+      let options = { headers: headers };
+
+      return this.httpClient.post(this.CREATE_USER,user,options);
   }
 
+  private LOGIN = "http://localhost:8081/User/authenticate";
+  
+  private returnedData;
+  
+  login(user){
+    console.log("Logged in user in service layer"+user.username);
 
- 
+    this.returnedData = this.httpClient.post(this.LOGIN,user,{observe: 'response'});
+    (error) => alert("cannot connect to server"+this.httpClient);
+    return this.httpClient.post(this.LOGIN,user);;
+  }
 
 }
