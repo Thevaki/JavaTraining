@@ -1,8 +1,9 @@
 package com.libraryManagementSystem.User.Service;
 
-import com.libraryManagementSystem.User.Model.User;
+import com.libraryManagementSystem.User.Model.AppUser;
 import com.libraryManagementSystem.User.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,15 +14,20 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
-    public User createUser(User user){
+    public AppUser createUser(AppUser user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        System.out.println("PASSWORD ENCODING "+user.getPassword());
         return userRepository.save(user);
     }
 
-    public User editUserDetails(User user){return userRepository.save(user);}
+    public AppUser editUserDetails(AppUser user){return userRepository.save(user);}
 
-    public User deleteUser(Integer id){
-        Optional<User> user = userRepository.findById(id);
+    public AppUser deleteUser(Integer id){
+        Optional<AppUser> user = userRepository.findById(id);
 
         if(user.isPresent()) {
             userRepository.deleteById(id);
@@ -31,8 +37,8 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    public User findUserById(Integer id){
-        Optional<User> user = userRepository.findById(id);
+    public AppUser findUserById(Integer id){
+        Optional<AppUser> user = userRepository.findById(id);
 
         if(user.isPresent()) {
             return user.get();
@@ -40,8 +46,8 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    public List<User> fetchAllUsers(){
-        List<User> users = userRepository.findAll();
+    public List<AppUser> fetchAllUsers(){
+        List<AppUser> users = userRepository.findAll();
 
         if(users.isEmpty()){
             return null;

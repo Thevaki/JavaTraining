@@ -1,18 +1,18 @@
 package com.libraryManagementSystem.User.Service;
 
-import com.libraryManagementSystem.User.Model.User;
+import com.libraryManagementSystem.User.Model.AppUser;
 
 import java.util.List;
 
 public interface UserService {
 
-    User createUser(User book);
+    AppUser createUser(AppUser book);
 
-    User editUserDetails(User book);
+    AppUser editUserDetails(AppUser book);
 
-    User deleteUser(Integer id);
+    AppUser deleteUser(Integer id);
 
-    User findUserById(Integer id);
+    AppUser findUserById(Integer id);
 
-    List<User> fetchAllUsers();
+    List<AppUser> fetchAllUsers();
 }

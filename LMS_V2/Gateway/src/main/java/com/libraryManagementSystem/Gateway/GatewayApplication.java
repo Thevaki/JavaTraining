@@ -6,8 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
+/*validate the tokens at the gateway level, and let the auth service validate user credentials, and issue tokens. */
+
 @SpringBootApplication
-@EnableEurekaClient 		// It acts as a eureka client
+@EnableEurekaClient
 @EnableZuulProxy
 public class GatewayApplication {
 
