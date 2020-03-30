@@ -10,6 +10,8 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './login/login.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { AddBookComponent } from './add-book/add-book.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { UserRegistrationComponent } from './user-registration/user-registration
     UserComponent,
     LoginComponent,
     BookDetailComponent,
-    UserRegistrationComponent
+    UserRegistrationComponent,
+    AdminHomeComponent,
+    AddBookComponent
   ],
   imports: [
     BrowserModule,
