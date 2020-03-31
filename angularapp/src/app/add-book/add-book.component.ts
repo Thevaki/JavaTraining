@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-book',
@@ -7,9 +9,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddBookComponent implements OnInit {
 
-  constructor() { }
+    //private userId:number;
+    private txtName:String;
+    private txtAuthor:String;
+    private txtBookImageUrl:String;
 
-  ngOnInit() {
+    private data:any[];
+
+    constructor(private dataService: DataService,private router: Router) { }
+
+    result: string;
+
+    ngOnInit() {}
+
+    createBook(){
+        var book = {
+          "bookName":this.txtName,
+          "author" : this.txtAuthor,
+          "imageUrl":this.txtBookImageUrl  
+        };
+
+        console.log("Form creation data "+this.txtName);
+
+        this.dataService.createBook(book).subscribe(
+          (data: any[]) => {
+               this.data = data,
+               this.result = "You have succesfully added a book to the system";
+               this.router.navigate(['admin-home']);
+            },
+          (response) => {
+              console.log("response "+response.status);   
+              this.result = "Try again";
+           }
+        );
   }
+
 
 }

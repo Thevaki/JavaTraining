@@ -50,7 +50,7 @@ export class DataService {
     //console.log("jwt "+res);
     console.log("resp "+this.returnedData.headers);
     (error) => alert("cannot connect to server"+this.httpClient);
-    return this.httpClient.post(this.LOGIN,user);;
+    return this.httpClient.post(this.LOGIN,user);
   }
 
   login_2(user){
@@ -58,6 +58,20 @@ export class DataService {
   .subscribe(resp => {
     console.log("DS "+resp.headers.get('authorization'));
   });
+  }
+
+  private CREATE_BOOK = "http://localhost:8762/book/Book/createBook";
+
+  createBook(book){
+      const idToken = localStorage.getItem("id_token");
+      console.log("Token "+idToken);
+
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer "+idToken });
+      let options = { headers: headers };
+
+      return this.httpClient.post(this.CREATE_BOOK,book,options);
   }
 
 }
