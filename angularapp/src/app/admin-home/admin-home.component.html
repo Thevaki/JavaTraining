@@ -1,4 +1,32 @@
-<div  align="center" style=" padding-top:2%;" vertical-align: middle>
+<div class="container"><br/>
+    <div class="row">	
+        <div *ngFor="let book of books">			
+            <div class="col-md-8">
+                <div class="thumbnail">
+                    <img width="200" height="250" src="./assets/BookImages/{{book.imageUrl}}">
+                    <div class ="caption">
+                        <h6>{{ book.bookName}}</h6>
+						<div class="row">
+                            <div class="col-md-7">
+                            	<h6> {{ book.author}}</h6>
+                            </div>
+                        </div>
+                        <button class="add_cart btn btn-info btn-block" a routerLink="/book-detail">View Book</button><p>
+                        <button id="editBook" class="btn btn-primary"  a routerLink="/add-book">Edit Book</button><p>
+                        <button id="deleteBook" class="btn btn-primary"  a routerLink="/">Delete Book</button><p>
+						<p><p>
+					</div>
+                </div>
+            </div>
+		</div>
+	</div>
+    <div  align="center" style=" padding-top:2%;" vertical-align: middle>
+    <button id="addBook" class="btn btn-primary" a routerLink="/add-book">Add New Book</button><p>
+    </div>
+</div>
+
+
+<!-- <div  align="center" style=" padding-top:2%;" vertical-align: middle>
      <button id="addBook" class="btn btn-primary" a routerLink="/add-book">Add Book</button><p>
      <button id="editBook" class="btn btn-primary"  a routerLink="/add-book">Edit Book</button><p>
      <button id="deleteBook" class="btn btn-primary"  a routerLink="/">Delete Book</button><p>
@@ -7,4 +35,4 @@
      <button id="editUser" class="btn btn-primary"  a routerLink="/">Edit User</button><p>
      <button id="deleteUser" class="btn btn-primary"  a routerLink="/">Delete User</button><p>
      <button id="viewAllUsers" class="btn btn-primary"  a routerLink="/">View All Users</button><p>
-</div>
+</div> -->

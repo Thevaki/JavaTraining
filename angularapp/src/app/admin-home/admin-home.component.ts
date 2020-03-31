@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
-  constructor() { }
+	books = [];
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+  		this.dataService.fetchAllBooks().subscribe((data: any[])=>{
+      		console.log(data);
+      		this.books = data;
+    	}) 
   }
 
 }

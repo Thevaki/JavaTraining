@@ -9,9 +9,9 @@ import { map } from 'rxjs/operators';
 })
 export class DataService {
 
-  private FETCH_ALL_BOOKS = "http://localhost:8762/book/Book/fetchAllBooks";
-
   constructor(private httpClient: HttpClient) { }
+
+  private FETCH_ALL_BOOKS = "http://localhost:8762/book/Book/fetchAllBooks";
 
    public fetchAllBooks(){
     return this.httpClient.get(this.FETCH_ALL_BOOKS);
@@ -72,6 +72,12 @@ export class DataService {
       let options = { headers: headers };
 
       return this.httpClient.post(this.CREATE_BOOK,book,options);
+  }
+
+  private FETCH_ALL_USERS = "http://localhost:8762/user/User/fetchAllUsers";
+
+   public fetchAllUsers(){
+    return this.httpClient.get(this.FETCH_ALL_USERS);
   }
 
 }
