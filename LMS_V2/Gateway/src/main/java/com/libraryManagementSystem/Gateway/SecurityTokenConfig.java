@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@EnableWebSecurity 
+@EnableWebSecurity
 public class SecurityTokenConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private JwtConfig jwtConfig;
@@ -25,10 +25,15 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter{
 		    .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED)) 	
 		.and()
 		   .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class)
-		.authorizeRequests()
-		   .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()  
-		   .antMatchers("/book"+"/user" + "/admin/**").hasRole("ADMIN")
-		   .anyRequest().authenticated(); 
+				   .authorizeRequests()
+				   .antMatchers("/admin/home/**").access("hasRole('ROLE_ADMIN')")
+				   .antMatchers("/auth").permitAll()
+				   .anyRequest().fullyAuthenticated();
+//		.authorizeRequests()
+//		   .antMatchers("/auth").permitAll()
+//				   .antMatchers("/admin/home").access("hasRole('ROLE_ADMIN')")
+//				   .antMatchers("/book").permitAll()
+//		   .anyRequest().authenticated();
 	}
 	
 	@Bean
