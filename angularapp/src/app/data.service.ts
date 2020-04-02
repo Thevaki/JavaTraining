@@ -14,7 +14,14 @@ export class DataService {
   private FETCH_ALL_BOOKS = "http://localhost:8762/book/Book/fetchAllBooks";
 
    public fetchAllBooks(){
-    return this.httpClient.get(this.FETCH_ALL_BOOKS);
+    const idToken = localStorage.getItem("id_token");
+      console.log("Token "+idToken);
+
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer "+idToken });
+      let options = { headers: headers };
+    return this.httpClient.get(this.FETCH_ALL_BOOKS,options);
   }
 
   private FIND_BOOK = "http://localhost:8762/book/Book/findBook/1";
@@ -37,29 +44,6 @@ export class DataService {
       return this.httpClient.post(this.CREATE_USER,user,options);
   }
 
-  private LOGIN = "http://localhost:8762/auth";
-  
-  private returnedData;
-  
-  login(user){
-    console.log("Logged in user in service layer"+user.username);
-
-    this.returnedData = this.httpClient.post(this.LOGIN,user,{observe: 'response'});
-    //console.log("jwt "+this.returnedData.response.headers.keys);
-    //console.log("Auth " + this.returnedData.authorization); 
-    //console.log("jwt "+res);
-    console.log("resp "+this.returnedData.headers);
-    (error) => alert("cannot connect to server"+this.httpClient);
-    return this.httpClient.post(this.LOGIN,user);
-  }
-
-  login_2(user){
-  this.httpClient.get<any>(this.LOGIN, {observe: 'response'})
-  .subscribe(resp => {
-    console.log("DS "+resp.headers.get('authorization'));
-  });
-  }
-
   private CREATE_BOOK = "http://localhost:8762/book/Book/createBook";
 
   createBook(book){
@@ -78,6 +62,33 @@ export class DataService {
 
    public fetchAllUsers(){
     return this.httpClient.get(this.FETCH_ALL_USERS);
+   }
+  
+
+  /*login_2(user){
+    console.log("DS called ");
+
+    this.httpClient.post<any>(this.LOGIN, user, {observe: 'response'}).subscribe(
+    (resp => {
+      console.log("method called ");
+
+      console.log("headers "+resp.headers.keys());
+      console.log("DS "+resp.headers.get('authorization'));
+
+      localStorage.setItem('id_token', resp.headers.get('authorization'));
+    }),
+    (error) => alert("cannot connect to server. Try again"));
+  }*/
+
+  private returnedData;
+
+  private LOGIN = "http://localhost:8762/auth";
+
+  login(user){
+    console.log("DS called ");
+
+    this.returnedData = this.httpClient.post(this.LOGIN, user, {observe: 'response'});
+    return this.returnedData;
   }
 
 }
