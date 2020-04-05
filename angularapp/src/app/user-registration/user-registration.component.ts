@@ -31,7 +31,8 @@ export class UserRegistrationComponent implements OnInit{
           "password":this.txtPassword,
           "nicNo":this.txtNicNo,
           "address":this.txtAddress,
-          "telephoneNo":this.txtTelephone
+          "telephoneNo":this.txtTelephone,
+          "role":"user"
         };
 
         console.log("Form creation data "+this.txtUsername + this.txtPassword);

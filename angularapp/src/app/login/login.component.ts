@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
                this.returnedData = data;
                console.log("jwt "+this.returnedData.headers.get('authorization'));
                localStorage.setItem('id_token', this.returnedData.headers.get('authorization'));
-               console.log("id_token "+localStorage.getItem("id_token"));
+               console.log(localStorage.getItem("id_token"));
                this.result = "You have succesfully registered to the system";
                this.router.navigate(['books']);
             },

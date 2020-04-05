@@ -14,12 +14,12 @@ export class DataService {
   private FETCH_ALL_BOOKS = "http://localhost:8762/book/Book/fetchAllBooks";
 
    public fetchAllBooks(){
-    const idToken = localStorage.getItem("id_token");
-      console.log("Token "+idToken);
+      const idToken = localStorage.getItem("id_token");
+      console.log(idToken);
 
       let headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': "Bearer "+idToken });
+        'Authorization': idToken });
       let options = { headers: headers };
     return this.httpClient.get(this.FETCH_ALL_BOOKS,options);
   }
@@ -27,18 +27,25 @@ export class DataService {
   private FIND_BOOK = "http://localhost:8762/book/Book/findBook/1";
 
    public findBook(){
-    return this.httpClient.get(this.FIND_BOOK);
+    const idToken = localStorage.getItem("id_token");
+      console.log(idToken);
+
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': idToken });
+      let options = { headers: headers };
+    return this.httpClient.get(this.FIND_BOOK,options);
   }
 
   private CREATE_USER = "http://localhost:8762/user/User/createUser";
 
   createUser(user){
       const idToken = localStorage.getItem("id_token");
-      console.log("Token "+idToken);
+      console.log(idToken);
 
       let headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': "Bearer "+idToken });
+        'Authorization': idToken });
       let options = { headers: headers };
 
       return this.httpClient.post(this.CREATE_USER,user,options);
@@ -61,7 +68,15 @@ export class DataService {
   private FETCH_ALL_USERS = "http://localhost:8762/user/User/fetchAllUsers";
 
    public fetchAllUsers(){
-    return this.httpClient.get(this.FETCH_ALL_USERS);
+    const idToken = localStorage.getItem("id_token");
+      console.log("Token "+idToken);
+
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer "+idToken });
+      let options = { headers: headers };
+
+    return this.httpClient.get(this.FETCH_ALL_USERS,options);
    }
   
 

@@ -1,7 +1,8 @@
 <div class="container"><br/>
     <div class="row">	
-        <div *ngFor="let book of books">			
-            <div class="col-md-8">
+        <div *ngFor="let book of books">	
+        <form>		
+            <div class="col-md-12">
                 <div class="thumbnail">
                     <img width="200" height="250" src="./assets/BookImages/{{book.imageUrl}}">
                     <div class ="caption">
@@ -13,11 +14,13 @@
                         </div>
                         <button class="add_cart btn btn-info btn-block" a routerLink="/book-detail">View Book</button><p>
                         <button id="editBook" class="btn btn-primary"  a routerLink="/add-book">Edit Book</button><p>
-                        <button id="deleteBook" class="btn btn-primary"  a routerLink="/">Delete Book</button><p>
+                        <button id="deleteBook" class="btn btn-primary"  a routerLink="/">Delete Book</button>
+                        <p>
 						<p><p>
 					</div>
                 </div>
             </div>
+        </form>
 		</div>
 	</div>
     <div  align="center" style=" padding-top:2%;" vertical-align: middle>
