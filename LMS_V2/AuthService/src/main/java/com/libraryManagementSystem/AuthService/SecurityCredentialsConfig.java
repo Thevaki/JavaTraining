@@ -2,6 +2,7 @@ package com.libraryManagementSystem.AuthService;
 
 import javax.servlet.http.HttpServletResponse;
 
+//import com.libraryManagementSystem.AuthService.Filters.CorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.libraryManagementSystem.AuthService.Filters.JwtConfig;
 import com.libraryManagementSystem.AuthService.Filters.JwtUsernameAndPasswordAuthenticationFilter;
+import org.springframework.security.web.session.SessionManagementFilter;
 
 @EnableWebSecurity
 public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
@@ -53,4 +55,5 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();
 	}
+
 }

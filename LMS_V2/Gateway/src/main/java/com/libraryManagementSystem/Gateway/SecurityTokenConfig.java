@@ -10,6 +10,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.session.SessionManagementFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 @EnableWebSecurity
 public class SecurityTokenConfig extends WebSecurityConfigurerAdapter{
@@ -19,6 +23,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter{
 	@Override
   	protected void configure(HttpSecurity http) throws Exception {
     	   http
+				   .addFilterBefore(corsFilter(), SessionManagementFilter.class)
 		.csrf().disable()
 	 	    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) 	
 		.and()
@@ -40,4 +45,21 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter{
   	public JwtConfig jwtConfig() {
     	   return new JwtConfig();
   	}
+
+	@Bean
+	public CorsFilter corsFilter() {
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.addAllowedOrigin("*");
+		config.addAllowedHeader("*");
+		config.addAllowedMethod("OPTIONS");
+		config.addAllowedMethod("GET");
+		config.addAllowedMethod("POST");
+		config.addAllowedMethod("PUT");
+		config.addAllowedMethod("DELETE");
+		//config.addAllowedOrigin("http://localhost:4200");
+		source.registerCorsConfiguration("/**", config);
+		return new CorsFilter(source);
+	}
 }

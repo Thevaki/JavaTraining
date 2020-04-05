@@ -3,6 +3,7 @@ package com.libraryManagementSystem.User.Controller;
 import com.libraryManagementSystem.User.Model.AppUser;
 import com.libraryManagementSystem.User.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -15,6 +16,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    private Environment env;
 
     //@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
     @RequestMapping(value = "/createUser" , method = RequestMethod.POST)
@@ -41,6 +45,11 @@ public class UserController {
     @RequestMapping({ "/hello" })
     public String firstPage() {
         return "Hello World";
+    }
+
+    @RequestMapping("/admin/home")
+    public String homeAdmin() {
+        return "This is the admin area of Gallery service running at port: " + env.getProperty("local.server.port");
     }
 
 }

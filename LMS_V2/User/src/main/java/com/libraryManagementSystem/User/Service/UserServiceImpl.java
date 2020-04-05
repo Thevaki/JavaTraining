@@ -20,11 +20,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public AppUser createUser(AppUser user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        System.out.println("PASSWORD ENCODING "+user.getPassword());
         return userRepository.save(user);
     }
 
-    public AppUser editUserDetails(AppUser user){return userRepository.save(user);}
+    public AppUser editUserDetails(AppUser user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
+    }
 
     public AppUser deleteUser(Integer id){
         Optional<AppUser> user = userRepository.findById(id);

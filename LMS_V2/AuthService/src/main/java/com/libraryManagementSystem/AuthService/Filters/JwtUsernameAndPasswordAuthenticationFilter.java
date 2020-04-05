@@ -24,13 +24,15 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import com.libraryManagementSystem.AuthService.Filters.JwtConfig;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter   {
 	
 	private AuthenticationManager authManager;
 	
 	private JwtConfig jwtConfig;
-    
+
 	public JwtUsernameAndPasswordAuthenticationFilter(AuthenticationManager authManager, JwtConfig jwtConfig) {
 		this.authManager = authManager;
 		this.jwtConfig = jwtConfig;
@@ -39,6 +41,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 	}
 	
 	@Override
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
 		
@@ -57,6 +60,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 	}
 	
 	@Override
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication auth) throws IOException, ServletException {
 		
@@ -69,8 +73,12 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 			.setExpiration(new Date(now + jwtConfig.getExpiration() * 1000))  // in milliseconds
 			.signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes())
 			.compact();
-		
+
+		response.addHeader("Access-Control-Expose-Headers", "Authorization");
+		response.addHeader("Access-Control-Allow-Headers", "Authorization, Origin,  Content-Type, Accept");
 		response.addHeader(jwtConfig.getHeader(), jwtConfig.getPrefix() + token);
+		//response.setContentType(jwtConfig.getPrefix() + token);
+
 	}
 	
 	private static class UserCredentials {
