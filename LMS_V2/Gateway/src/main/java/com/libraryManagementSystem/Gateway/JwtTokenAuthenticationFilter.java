@@ -29,17 +29,18 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
 
-		String header = request.getHeader(jwtConfig.getHeader());
+		String header = request.getHeader(jwtConfig.getHeader()); //get authentication header.
 
-		if (header == null || !header.startsWith(jwtConfig.getPrefix())) {
+		if (header == null || !header.startsWith(jwtConfig.getPrefix())) { //validate header prefix
 			chain.doFilter(request, response);
 			return;
 		}
 
-		String token = header.replace(jwtConfig.getPrefix(), "");
+		String token = header.replace(jwtConfig.getPrefix(), ""); //Get token
 
 		try {
 
+			//Validate token
 			Claims claims = Jwts.parser().setSigningKey(jwtConfig.getSecret().getBytes()).parseClaimsJws(token)
 					.getBody();
 
@@ -51,14 +52,14 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 				UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, null,
 						authorities.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
 
-				SecurityContextHolder.getContext().setAuthentication(auth);
+				SecurityContextHolder.getContext().setAuthentication(auth); //authenticate user
 			}
 
 		} catch (Exception e) {
-			SecurityContextHolder.clearContext();
+			SecurityContextHolder.clearContext(); //user won't be authenticated in case of failure
 		}
 
-		chain.doFilter(request, response);
+		chain.doFilter(request, response); //go to next failure
 	}
 
 }

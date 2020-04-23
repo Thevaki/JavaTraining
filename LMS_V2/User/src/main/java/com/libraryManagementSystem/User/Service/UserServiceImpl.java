@@ -28,19 +28,19 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    public AppUser deleteUser(Integer id){
-        Optional<AppUser> user = userRepository.findById(id);
+    public AppUser deleteUser(String username){
+        Optional<AppUser> user = userRepository.findByUsername(username);
 
         if(user.isPresent()) {
-            userRepository.deleteById(id);
+            userRepository.deleteByUsername(username);
             return user.get();
         }
         return null;
 
     }
 
-    public AppUser findUserById(Integer id){
-        Optional<AppUser> user = userRepository.findById(id);
+    public AppUser findByUsername(String username){
+        Optional<AppUser> user = userRepository.findByUsername(username);
 
         if(user.isPresent()) {
             return user.get();

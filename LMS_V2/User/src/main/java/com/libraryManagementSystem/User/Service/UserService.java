@@ -10,9 +10,9 @@ public interface UserService {
 
     AppUser editUserDetails(AppUser book);
 
-    AppUser deleteUser(Integer id);
+    AppUser deleteUser(String username);
 
-    AppUser findUserById(Integer id);
+    AppUser findByUsername(String username);
 
     List<AppUser> fetchAllUsers();
 }

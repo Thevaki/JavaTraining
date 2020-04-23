@@ -1,5 +1,12 @@
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1; width: 100%; }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bg {
+  background-image: url("../../assets/BookImages/15.jpg");
+}
+
+.bookForm {border: 2px solid #2874A6; width: 100%; }
 
 input[type=text], input[type=password] {
   width: 100%;
@@ -11,8 +18,9 @@ input[type=text], input[type=password] {
 }
 
 button {
-  background-color: #4CAF50;
+  /*background-color: #4CAF50;*/
   color: white;
+  background: #2CACD3;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
@@ -22,8 +30,21 @@ button {
 
 button:hover {
   opacity: 0.8;
+  background: #0000FF;
 }
 
-.container {
-  padding: 16px;
+.darkBtn {
+  background: #1D6E87  ;
+}
+
+#outer
+{
+    width:150%;
+    text-align: center;
+}
+.inner
+{
+    display: inline-block;
+    text-align: center;
+    width:30%;
 }

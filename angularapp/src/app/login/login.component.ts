@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
 
-    private txtUsername:String;
-    private txtPassword:String;
+    private txtUsername:string;
+    private txtPassword:string;
     
     private data:any[];
     returnedData: any;
@@ -24,16 +24,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {}
 
-    /*save_2(){
-        var userLogin = {
-          "username" : this.txtUsername,
-          "password":this.txtPassword
-      };
-      console.log("Login form success "+this.txtUsername + this.txtPassword);
-      this.dataService.login_2(userLogin);
-      this.router.navigate(['books']);
-    }*/
-
+    /*login to the system by providing credetials*/
     save(){
         var userLogin = {
           "username" : this.txtUsername,
@@ -47,6 +38,7 @@ export class LoginComponent implements OnInit {
                localStorage.setItem('id_token', this.returnedData.headers.get('authorization'));
                console.log(localStorage.getItem("id_token"));
                this.result = "You have succesfully registered to the system";
+               localStorage.setItem('username', this.txtUsername);
                this.router.navigate(['books']);
             },
           (response) => {

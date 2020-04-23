@@ -39,4 +39,14 @@ public class BookController {
         return bookService.fetchAllBooks();
     }
 
+    @RequestMapping(value="/searchBooks/{bookName}",method = RequestMethod.GET)
+    public List<Book> searchBooks(@PathVariable("bookName") String bookName){
+        return bookService.searchBooks(bookName);
+    }
+
+    @RequestMapping(value="/categoryBooks/{category}",method = RequestMethod.GET)
+    public List<Book> categoryBooks(@PathVariable("category") String category){
+        return bookService.categoryBooks(category);
+    }
+
 }

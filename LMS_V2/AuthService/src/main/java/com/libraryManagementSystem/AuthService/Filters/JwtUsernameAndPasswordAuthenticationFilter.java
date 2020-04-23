@@ -26,6 +26,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import com.libraryManagementSystem.AuthService.Filters.JwtConfig;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+/*validate user credentials, and generate tokens*/
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter   {
 	
@@ -37,7 +38,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 		this.authManager = authManager;
 		this.jwtConfig = jwtConfig;
 		
-		this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher(jwtConfig.getUri(), "POST"));
+		this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher(jwtConfig.getUri(), "POST")); //override the defaults uri to auth uri
 	}
 	
 	@Override
@@ -47,18 +48,19 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 		
 		try {
 			
-			UserCredentials creds = new ObjectMapper().readValue(request.getInputStream(), UserCredentials.class);
+			UserCredentials credentials = new ObjectMapper().readValue(request.getInputStream(), UserCredentials.class); //get credentials from request
 			
 			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-					creds.getUsername(), creds.getPassword(), Collections.emptyList());
+					credentials.getUsername(), credentials.getPassword(), Collections.emptyList()); //create auth object for auth manager use
 			
-			return authManager.authenticate(authToken);
+			return authManager.authenticate(authToken); //load user with load user method and authenticate the user
 			
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
+	/*Upon successful authentication, generate a token.*/
 	@Override
 	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
@@ -68,7 +70,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 		String token = Jwts.builder()
 			.setSubject(auth.getName())	
 			.claim("authorities", auth.getAuthorities().stream()
-				.map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+				.map(GrantedAuthority::getAuthority).collect(Collectors.toList())) //Convert to list of strings to get it from gateway
 			.setIssuedAt(new Date(now))
 			.setExpiration(new Date(now + jwtConfig.getExpiration() * 1000))  // in milliseconds
 			.signWith(SignatureAlgorithm.HS512, jwtConfig.getSecret().getBytes())
@@ -76,11 +78,11 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
 		response.addHeader("Access-Control-Expose-Headers", "Authorization");
 		response.addHeader("Access-Control-Allow-Headers", "Authorization, Origin,  Content-Type, Accept");
-		response.addHeader(jwtConfig.getHeader(), jwtConfig.getPrefix() + token);
+		response.addHeader(jwtConfig.getHeader(), jwtConfig.getPrefix() + token); // add token to header
 		//response.setContentType(jwtConfig.getPrefix() + token);
 
 	}
-	
+
 	private static class UserCredentials {
 	    private String username, password;
 

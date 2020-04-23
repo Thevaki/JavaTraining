@@ -30,20 +30,21 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+				//.addFilterBefore(corsFilter(), SessionManagementFilter.class)
 		    .csrf().disable()
-	            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+	            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //session won't be used to store user's state.
 	        .and() 
-	            .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED))
+	            .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED)) // handle an authorized attempts
 	        .and()
-		    .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig))	
+		    .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig))	 //authenticate the user by passing user credentials
 		.authorizeRequests()
-		    .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
-		    .anyRequest().authenticated();
+		    .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll() //allow post requests
+		    .anyRequest().authenticated(); //other requests must be authenticated
 	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); //to load the user from database
 	}
 	
 	@Bean
@@ -56,4 +57,9 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 	    return new BCryptPasswordEncoder();
 	}
 
+//	@Bean
+//	CorsFilter corsFilter() {
+//		CorsFilter filter = new CorsFilter();
+//		return filter;
+//	}
 }

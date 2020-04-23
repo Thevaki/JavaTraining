@@ -10,8 +10,12 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
+.bg {
+  background-image: url("../../assets/BookImages/15.jpg");
+}
+
 button {
-  background-color: #4CAF50;
+  background-color: #2CACD3;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -22,8 +26,30 @@ button {
 
 button:hover {
   opacity: 0.8;
+  background: #0000FF;
 }
 
 .container {
   padding: 16px;
 }
+/*.required:after {
+    content:" *";
+    color: red;
+  }
+
+  .required input {
+   padding-right: 25px;
+   background-position: right top;
+}*/
+.asterisk::after {
+content:" *"; 
+color: #e32;
+position: absolute; 
+margin: -20px 0px 0px -20px; 
+font-size: x-large; 
+/*padding: 0 5px 0 0;*/ }
+
+/*.required-field::after {
+    content: "*";
+    color: red;
+}*/

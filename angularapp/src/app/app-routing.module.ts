@@ -7,6 +7,8 @@ import { UserRegistrationComponent } from './user-registration/user-registration
 import { UserComponent } from './user/user.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AddBookComponent } from './add-book/add-book.component';
+import { EditBookComponent } from './edit-book/edit-book.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const routes: Routes = [
   {
@@ -18,7 +20,7 @@ const routes: Routes = [
     component:LoginComponent
   },
   {
-    path: 'book-detail',    
+    path: 'book-detail/:id',    
     component: BookDetailComponent
   },
   {
@@ -36,6 +38,18 @@ const routes: Routes = [
   {
     path: 'add-book',    
     component: AddBookComponent
+  },
+  {
+    path: 'add-book/:id',    
+    component: AddBookComponent
+  },
+  {
+    path: 'edit-book/:id',    
+    component: EditBookComponent
+  },
+   {
+    path: 'edit-profile',    
+    component: EditProfileComponent
   }
 ];
 

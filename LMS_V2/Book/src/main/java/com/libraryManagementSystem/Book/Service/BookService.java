@@ -14,4 +14,8 @@ public interface BookService {
     Book findBook(Integer id);
 
     List<Book> fetchAllBooks();
+
+    List<Book> searchBooks(String title);
+
+    List<Book> categoryBooks(String category);
 }

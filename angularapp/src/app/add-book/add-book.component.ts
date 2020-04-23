@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-add-book',
@@ -16,9 +17,11 @@ export class AddBookComponent implements OnInit {
 
     private data:any[];
 
-    constructor(private dataService: DataService,private router: Router) { }
+    constructor(private dataService: DataService,private router: Router,private route: ActivatedRoute) { }
 
     result: string;
+
+    private bookId = "";
 
     ngOnInit() {}
 
@@ -42,7 +45,7 @@ export class AddBookComponent implements OnInit {
               this.result = "Try again";
            }
         );
-  }
+    }
 
-
+   
 }

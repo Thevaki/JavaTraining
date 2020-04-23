@@ -49,4 +49,22 @@ public class BookServiceImpl implements BookService {
         }
         return  books;
     }
+
+    public List<Book> searchBooks(String bookName){
+        List<Book> books = bookRepository.findByBookNameContainingIgnoreCase(bookName);
+
+        if(books.isEmpty()){
+            return null;
+        }
+        return  books;
+    }
+
+    public List<Book> categoryBooks(String category){
+        List<Book> books = bookRepository.findByCategoryContainingIgnoreCase(category);
+
+        if(books.isEmpty()){
+            return null;
+        }
+        return  books;
+    }
 }

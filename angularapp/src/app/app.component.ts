@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-app';
+
+  signOut(){
+  console.log(localStorage.getItem("id_token"));
+  localStorage.clear();
+  console.log(localStorage.getItem("id_token"));
+  }
 }

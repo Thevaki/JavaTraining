@@ -25,26 +25,31 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter{
     	   http
 				   .addFilterBefore(corsFilter(), SessionManagementFilter.class)
 		.csrf().disable()
-	 	    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) 	
+	 	    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //session won't be used to store user's state.
 		.and()
-		    .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED)) 	
+		    .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED)) // handle authorized attempts
 		.and()
 		   .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class)
 				   .authorizeRequests()
-				   .antMatchers("/admin/home/**").access("hasRole('ROLE_ADMIN')")
-				   .antMatchers("/auth").permitAll()
-				   .anyRequest().fullyAuthenticated();
-//		.authorizeRequests()
-//		   .antMatchers("/auth").permitAll()
-//				   .antMatchers("/admin/home").access("hasRole('ROLE_ADMIN')")
-//				   .antMatchers("/book").permitAll()
-//		   .anyRequest().authenticated();
+				   .antMatchers("/user/User" + "/admin/home**").access("hasRole('admin')") //must be an admin
+				   .antMatchers("/book/Book" + "/createBook**").access("hasRole('admin')") //must be an admin
+				   .antMatchers("/book/Book" + "/editBook**").access("hasRole('admin')") //must be an admin
+				   .antMatchers("/book/Book" + "/deleteBook/{id}**").access("hasRole('admin')") //must be an admin
+				   .antMatchers("/auth").permitAll() //allow who are accessing "auth" service
+				   .antMatchers("/user/User" + "/createUser**").permitAll() //allow when creating a new user
+				   .anyRequest().fullyAuthenticated(); //other request must be authenticated
 	}
 	
 	@Bean
   	public JwtConfig jwtConfig() {
     	   return new JwtConfig();
   	}
+
+//	@Bean
+//	CorsFilter corsFilter() {
+//		CorsFilter filter = new CorsFilter();
+//		return filter;
+//	}
 
 	@Bean
 	public CorsFilter corsFilter() {

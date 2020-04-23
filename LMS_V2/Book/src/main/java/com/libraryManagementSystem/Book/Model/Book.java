@@ -16,4 +16,5 @@ public class Book {
     private String bookName;
     private String author;
     private String imageUrl;
+    private String category;
 }

@@ -12,6 +12,8 @@ import { BookDetailComponent } from './book-detail/book-detail.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AddBookComponent } from './add-book/add-book.component';
+import { EditBookComponent } from './edit-book/edit-book.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { AddBookComponent } from './add-book/add-book.component';
     BookDetailComponent,
     UserRegistrationComponent,
     AdminHomeComponent,
-    AddBookComponent
+    AddBookComponent,
+    EditBookComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

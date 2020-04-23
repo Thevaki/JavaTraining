@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 
 @SpringBootApplication
 @EnableEurekaClient
+//@CrossOrigin(origins = "http://localhost:4200")
 public class BookApplication {
 
 	public static void main(String[] args) {
