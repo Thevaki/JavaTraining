@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 export class AdminHomeComponent implements OnInit {
   private data:any[];
 	books = [];
+  categories = [];
   result: string;
   private bookId = "";
   private txtSearch:String;
@@ -23,6 +24,11 @@ export class AdminHomeComponent implements OnInit {
       		console.log(data);
       		this.books = data;
     	}); 
+
+      this.dataService.fetchAllCategories().subscribe((categoryData: any[])=>{
+        console.log(categoryData);
+        this.categories = categoryData;
+      });
   }
 
   deleteBook(bookId){
@@ -61,12 +67,12 @@ export class AdminHomeComponent implements OnInit {
         );
     }
 
-    categoryBooks(category){
-       console.log("response "+category);
+   categoryBooks(categoryId){
+       console.log("response "+categoryId);
         
-        this.dataService.categoryBooks(category).subscribe(
+        this.dataService.fetchBookByCategory(categoryId).subscribe(
           (data: any[]) => {
-              console.log("response "+category);
+              console.log("response "+categoryId);
               this.books = data;  
             },
           (response) => {

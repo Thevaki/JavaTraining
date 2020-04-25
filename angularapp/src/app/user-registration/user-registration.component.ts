@@ -84,12 +84,10 @@ export class UserRegistrationComponent implements OnInit{
                           console.log(messageTemplate[1]);
                           var message = messageTemplate[1].replace(/[^\w ]+/g,'').replace(/ +/g,' ');
                           this.result = message;
-                }         
- }
+                    }         
+                }
               //this.result = "Registration failed. Try again";
-            }
-        );
-  }
-
-
+              }
+          );
+        }
 }

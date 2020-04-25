@@ -31,3 +31,10 @@ button:hover {
 .container {
   padding: 16px;
 }
+.asterisk::after {
+content:" *"; 
+color: #e32;
+position: absolute; 
+margin: -10px 0px 0px -20px; 
+font-size: x-large; 
+/*padding: 0 5px 0 0;*/ }

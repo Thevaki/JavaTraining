@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,6 +26,7 @@ public class AppUser{
     private String password;
 
     @NotBlank(message = "Email cannot be empty")
+    @Email(message = "Enter valid email address")
     private  String email;
 
     @NotBlank(message = "Role cannot be empty")

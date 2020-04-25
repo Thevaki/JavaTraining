@@ -9,8 +9,10 @@ import { DataService } from '../data.service';
 export class BooksComponent implements OnInit {
 
    books = [];
+   categories = [];
    private txtSearch:String;
-   private category:String;
+   //private category:String;
+   private categoryId:number;
 
    constructor(private dataService: DataService) { }
 
@@ -18,7 +20,13 @@ export class BooksComponent implements OnInit {
       this.dataService.fetchAllBooks().subscribe((data: any[])=>{
         console.log(data);
         this.books = data;
-      })  
+      });
+
+      this.dataService.fetchAllCategories().subscribe((categoryData: any[])=>{
+        console.log(categoryData);
+        this.categories = categoryData;
+      });
+      
      }
 
     searchBook(){
@@ -38,12 +46,12 @@ export class BooksComponent implements OnInit {
         );
     }
 
-    categoryBooks(category){
-       console.log("response "+category);
+    categoryBooks(categoryId){
+       console.log("response "+categoryId);
         
-        this.dataService.categoryBooks(category).subscribe(
+        this.dataService.fetchBookByCategory(categoryId).subscribe(
           (data: any[]) => {
-              console.log("response "+category);
+              console.log("response "+categoryId);
               this.books = data;  
             },
           (response) => {

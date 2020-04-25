@@ -1,8 +1,10 @@
 package com.libraryManagementSystem.Book.Service;
 
 import com.libraryManagementSystem.Book.Model.Book;
+import com.libraryManagementSystem.Book.Model.BookCategory;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface BookService {
     Book createBook(Book book);
@@ -17,5 +19,9 @@ public interface BookService {
 
     List<Book> searchBooks(String title);
 
-    List<Book> categoryBooks(String category);
+    List<BookCategory> fetchAllCategories();
+
+    List<Book> findCategoryBooks(Integer id);
+
+    //List<Book> categoryBooks(String category);
 }

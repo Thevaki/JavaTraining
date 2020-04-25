@@ -5,13 +5,14 @@
 <hr/>
 <div id="addBookView"  style=" padding: 70px;" align="center" >
 
-   <form class="form-group" style="width:80%" >
+   <form autocomplete="off" ngNativeValidate (ngSubmit)="createBook()" class="form-group" style="width:80%" >
       
       <div class="row" style=" padding-top: 10px;">
          <label class="col-sm-2 control-label" align="left">Name :</label>
          <div class="col-sm-10">
             <input class="form-control" name="txtName" [(ngModel)]="txtName" type="text" required>
          </div>
+         <label class="asterisk"></label>
       </div>
 
       <div class="row" style=" padding-top: 2%;">
@@ -19,6 +20,7 @@
          <div class="col-sm-10">
             <input class="form-control" name="txtAuthor" [(ngModel)]="txtAuthor" type="text" required>
          </div>
+         <label class="asterisk"></label>
       </div>
 
       <div class="row" style=" padding-top: 2%;">
@@ -26,12 +28,50 @@
          <div class="col-sm-10">
             <input class="form-control" name="txtBookImageUrl" [(ngModel)]="txtBookImageUrl" type="text" required>
          </div>
+         <label class="asterisk"></label>
       </div>
+
+
+      <div class="row" style=" padding-top: 2%;">
+         <label class="col-sm-2 control-label" align="left">Category : </label>
+         <div class="col-sm-10" >
+            <select [(ngModel)]="txtCategory" (ngModelChange)="onChangeObj($event)" [ngModelOptions]="{standalone: true}" class="form-control" style="width:920px" required>
+               <option *ngFor='let category of categories' [ngValue]="category">{{category.id}} - {{category.name}}</option>
+            </select>
+         </div>
+      </div>
+
+
+<!--        <select [(ngModel)]="category.name">
+      <option *ngFor="let category of categories" [value]="category.name" >
+  {{category.name}}
+</option>
+</select> -->
+
+<!--       <div ng-app="myApp" ng-controller="myCtrl">
+          <div *ngFor="let category of categories">  -->
+         <!-- <select ng-model="selectedName" ng-options="{{category.name}}"></select> -->
+<!--          <select>
+            <option ng-repeat="x in categories">{{x}}</option>
+         </select>
+          </div> 
+      </div> -->
+
+
+<!--       <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+         <button class="btn btn-outline-danger" ngbDropdownToggle>Select me</button>
+         <div class="dropdown-menu" ngbDropdownMenu>
+            <button ngbDropdownItem>One</button>
+            <button ngbDropdownItem>Two</button>
+            <button ngbDropdownItem>Four!</button>
+         </div>
+      </div> -->
+
     
       <p></p>
 
       <div>       
-         <button type="button" class="btn btn-primary" (click)="createBook()">Add Book</button>
+         <button type="submit" class="btn btn-primary">Add Book</button>
       </div>
          
    </form>

@@ -1,8 +1,9 @@
 package com.libraryManagementSystem.Book.Service;
 
 import com.libraryManagementSystem.Book.Model.Book;
+import com.libraryManagementSystem.Book.Model.BookCategory;
+import com.libraryManagementSystem.Book.Repository.BookCategotyRepository;
 import com.libraryManagementSystem.Book.Repository.BookRepository;
-import com.libraryManagementSystem.Book.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,12 @@ public class BookServiceImpl implements BookService {
     @Autowired
     BookRepository bookRepository;
 
+    @Autowired
+    BookCategotyRepository bookCategotyRepository;
+
     @Override
     public Book createBook(Book book){
-        return bookRepository.save(book);
+        return bookRepository.saveAndFlush(book);
     }
 
     public Book editBook(Book book){return bookRepository.save(book);}
@@ -59,12 +63,30 @@ public class BookServiceImpl implements BookService {
         return  books;
     }
 
-    public List<Book> categoryBooks(String category){
-        List<Book> books = bookRepository.findByCategoryContainingIgnoreCase(category);
+    public List<BookCategory> fetchAllCategories(){
+        List<BookCategory> categories = bookCategotyRepository.findAll();
 
-        if(books.isEmpty()){
+        if(categories.isEmpty()){
             return null;
         }
-        return  books;
+        return  categories;
     }
+
+    public List<Book> findCategoryBooks(Integer id){
+        List<Book> categoryBooks = bookRepository.findByBookCategoryId(id);
+
+        if(categoryBooks.isEmpty()){
+            return null;
+        }
+        return  categoryBooks;
+    }
+
+//    public List<Book> categoryBooks(String category){
+//        List<Book> books = bookRepository.findByCategoryContainingIgnoreCase(category);
+//
+//        if(books.isEmpty()){
+//            return null;
+//        }
+//        return  books;
+//    }
 }

@@ -1,12 +1,14 @@
 package com.libraryManagementSystem.Book.Controller;
 
 import com.libraryManagementSystem.Book.Model.Book;
+import com.libraryManagementSystem.Book.Model.BookCategory;
 import com.libraryManagementSystem.Book.Service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/Book")
@@ -27,13 +29,11 @@ public class BookController {
     @RequestMapping(value = "/deleteBook/{id}",method = RequestMethod.DELETE)
     public Book deleteBook(@PathVariable("id") Integer id){return bookService.deleteBook(id);}
 
-    //@CrossOrigin(origins = "http://localhost:4200/book", maxAge = 3600)
     @RequestMapping(value="/findBook/{id}",method = RequestMethod.GET)
     public Book findBook(@PathVariable("id") Integer id){
         return bookService.findBook(id);
     }
 
-    //@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
     @RequestMapping(value="/fetchAllBooks",method = RequestMethod.GET)
     public List<Book> fetchAllBooks(){
         return bookService.fetchAllBooks();
@@ -44,9 +44,19 @@ public class BookController {
         return bookService.searchBooks(bookName);
     }
 
-    @RequestMapping(value="/categoryBooks/{category}",method = RequestMethod.GET)
-    public List<Book> categoryBooks(@PathVariable("category") String category){
-        return bookService.categoryBooks(category);
+    @RequestMapping(value="/fetchAllCategories",method = RequestMethod.GET)
+    public List<BookCategory> fetchAllCategories(){
+        return bookService.fetchAllCategories();
     }
+
+    @RequestMapping(value="/findCategoryBooks/{id}",method = RequestMethod.GET)
+    public List<Book> findCategoryBooks(@PathVariable("id") Integer id){
+        return bookService.findCategoryBooks(id);
+    }
+
+//    @RequestMapping(value="/categoryBooks/{category}",method = RequestMethod.GET)
+//    public List<Book> categoryBooks(@PathVariable("category") String category){
+//        return bookService.categoryBooks(category);
+//    }
 
 }

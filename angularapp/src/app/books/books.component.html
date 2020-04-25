@@ -1,6 +1,5 @@
 <div class="bg"> 
 <br/>
-
      <div class="row">
 
     <div id="outer">
@@ -16,13 +15,21 @@
 
     <div class="col-md-3">
         <div  align="center" style=" padding-top:2%;" vertical-align: middle>
+            <div *ngFor="let category of categories">
+                <button class="darkBtn" (click)="categoryBooks(category.id)">{{ category.name}}</button><p>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="col-md-3">
+        <div  align="center" style=" padding-top:2%;" vertical-align: middle>
             <button id="Fantasy" class="darkBtn" (click)="categoryBooks('Fantasy')">Fantasy</button><p>
             <button id="Technology" class="darkBtn"  (click)="categoryBooks('Technology')">Technology</button><p>
             <button id="Cook Books" class="darkBtn"  (click)="categoryBooks('Cook Books')">Cook Books</button><p>
             <button id="Maths" class="darkBtn"  (click)="categoryBooks('Maths')">Maths</button><p>
             <button id="Autobiography" class="darkBtn"  (click)="categoryBooks('Autobiography')">Autobiography</button><p>
         </div>
-    </div>
+    </div> -->
 
 <div class="container"><br/>
     <div class="row">	

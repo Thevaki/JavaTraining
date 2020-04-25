@@ -6,7 +6,7 @@
 
 
 <div id="loginView" style=" padding-top:10%; "align="center">
-<form  class="form-horizontal" style="width:50%">
+<form ngNativeValidate (ngSubmit)="save()"  class="form-horizontal" style="width:50%">
 
   <div class="form-group">
       <label class="col-sm-2 control-label">Username : </label>
@@ -24,7 +24,7 @@
   <p></p>
   
   <div  align="center">
-     <button id="loginBtn" class="btn btn-info btn-block"  (click)="save()">Login</button>
+     <button id="loginBtn" class="btn btn-info btn-block"  type="submit">Login</button>
      <button id="registerBtn" class="btn btn-info btn-block"  a routerLink="/user-registration">Register</button>
   </div>
 

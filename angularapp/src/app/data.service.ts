@@ -65,6 +65,32 @@ export class DataService {
     return this.httpClient.get(this.CATEGORY_BOOK+category,options);
   }
 
+  private FETCH_ALL__CATEGORIES = "http://localhost:8762/book/Book/fetchAllCategories";
+
+   public fetchAllCategories(){
+    const idToken = localStorage.getItem("id_token");
+      console.log(idToken);
+
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': idToken });
+      let options = { headers: headers };
+    return this.httpClient.get(this.FETCH_ALL__CATEGORIES,options);
+  }
+
+  private FETCH_BOOK_BY_CATEGORY = "http://localhost:8762/book/Book/findCategoryBooks/";
+
+   public fetchBookByCategory(categoryId){
+    const idToken = localStorage.getItem("id_token");
+      console.log(idToken);
+
+      let headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': idToken });
+      let options = { headers: headers };
+    return this.httpClient.get(this.FETCH_BOOK_BY_CATEGORY+categoryId,options);
+  }
+
   private CREATE_USER = "http://localhost:8762/user/User/createUser";
 
   createUser(user){
